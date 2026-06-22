@@ -562,79 +562,91 @@
         updatePackageSelection();
 
         function calculate() {
-            const selected = document.querySelector('input[name="package"]:checked');
-            if (!selected) return;
-            const pkgKey = selected.value;
-            const pkg = packages[pkgKey];
-            if (!pkg) return;
+    const selected = document.querySelector('input[name="package"]:checked');
+    if (!selected) return;
+    const pkgKey = selected.value;
+    const pkg = packages[pkgKey];
+    if (!pkg) return;
 
-            const personalCount = parseInt(personalCountInput.value) || 0;
-            const dup = parseFloat(duplicationSelect.value) || 0.5;
-            const avgCheck = parseFloat(avgCheckInput.value) || 120;
-            const rate = parseFloat(rateInput.value) || 100;
+    const personalCount = parseInt(personalCountInput.value) || 0;
+    const dup = parseFloat(duplicationSelect.value) || 0.5;
+    const avgCheck = parseFloat(avgCheckInput.value) || 120;
+    const rate = parseFloat(rateInput.value) || 100;
 
-            // --- Личный бонус ---
-            const personalPV = personalCount * avgCheck * pkg.personalPercent;
+    // --- Личный бонус ---
+    const personalPV = personalCount * avgCheck * pkg.personalPercent;
 
-            // --- Бинарный бонус (дупликация на 2 уровня) ---
-            // 1-й уровень: личные приглашения * dup
-            const level1 = personalCount * dup;
-            // 2-й уровень: level1 * dup
-            const level2 = level1 * dup;
-            const totalBinaryMembers = personalCount + level1 + level2;
-            // Общий объём структуры (PV)
-            const structPV = totalBinaryMembers * avgCheck;
-            // Бинарный бонус начисляется с меньшей ветки (принимаем 50% от общего объёма)
-            const smallerLegPV = structPV * 0.5;
-            const binaryPV = smallerLegPV * pkg.binaryPercent;
+    // --- Бинарный бонус (активируется только при >= 3 личных приглашениях) ---
+    let binaryPV = 0;
+    let structPV = 0;
+    let level1 = 0, level2 = 0, totalBinaryMembers = 0;
 
-            // --- Матчинг-бонус (чек от чека) ---
-            let matchingPV = 0;
-            if (pkg.matchingLevels > 0) {
-                // Принимаем, что каждый партнёр 1-го уровня генерирует бинарный бонус, равный бинарному бонусу лидера * dup
-                const partnerBinary = binaryPV * dup; // средний бинарный бонус одного партнёра 1-го уровня
-                const level1Partners = personalCount * dup;
-                // Матчинг на 1-й уровень
-                let match1 = partnerBinary * 0.05 * level1Partners;
-                if (pkg.matchingLevels >= 2) {
-                    const level2Partners = level1Partners * dup;
-                    let match2 = partnerBinary * 0.03 * level2Partners;
-                    if (pkg.matchingLevels >= 3) {
-                        const level3Partners = level2Partners * dup;
-                        let match3 = partnerBinary * 0.02 * level3Partners;
-                        matchingPV = match1 + match2 + match3;
-                    } else {
-                        matchingPV = match1 + match2;
-                    }
-                } else {
-                    matchingPV = match1;
-                }
+    if (personalCount >= 3) {
+        // 1-й уровень: личные приглашения * dup
+        level1 = personalCount * dup;
+        // 2-й уровень: level1 * dup
+        level2 = level1 * dup;
+        totalBinaryMembers = personalCount + level1 + level2;
+        structPV = totalBinaryMembers * avgCheck;
+        // Бинарный бонус начисляется с меньшей ветки (принимаем 50% от общего объёма)
+        const smallerLegPV = structPV * 0.5;
+        binaryPV = smallerLegPV * pkg.binaryPercent;
+    } else {
+        // Если меньше 3 приглашений, бинар не активирован, структура считается только из личных приглашений
+        totalBinaryMembers = personalCount;
+        structPV = personalCount * avgCheck;
+        binaryPV = 0;
+    }
+
+    // --- Матчинг-бонус (чек от чека) ---
+    let matchingPV = 0;
+    if (pkg.matchingLevels > 0 && personalCount >= 3) {
+        // Матчинг считается только если бинар активирован
+        const partnerBinary = binaryPV * dup; // средний бинарный бонус одного партнёра 1-го уровня
+        const level1Partners = personalCount * dup;
+        // Матчинг на 1-й уровень
+        let match1 = partnerBinary * 0.05 * level1Partners;
+        if (pkg.matchingLevels >= 2) {
+            const level2Partners = level1Partners * dup;
+            let match2 = partnerBinary * 0.03 * level2Partners;
+            if (pkg.matchingLevels >= 3) {
+                const level3Partners = level2Partners * dup;
+                let match3 = partnerBinary * 0.02 * level3Partners;
+                matchingPV = match1 + match2 + match3;
+            } else {
+                matchingPV = match1 + match2;
             }
-
-            // --- Бонусы за статусы (упрощённо) ---
-            // Чем выше пакет, тем больше процент от оборота (за счёт доступа к более высоким статусам)
-            const statusPV = structPV * pkg.statusBonusRate;
-
-            // --- Итог ---
-            const total = personalPV + binaryPV + matchingPV + statusPV;
-            const totalRubVal = total * rate;
-
-            // Отображение
-            personalBonusPV.textContent = personalPV.toFixed(2);
-            binaryBonusPV.textContent = binaryPV.toFixed(2);
-            matchingBonusPV.textContent = matchingPV.toFixed(2);
-            statusBonusPV.textContent = statusPV.toFixed(2);
-            totalPV.textContent = total.toFixed(2);
-            totalRub.textContent = totalRubVal.toFixed(2) + ' ₽';
-
-            // Примечание
-            let note = `⚡ <strong>Расчёт консервативный:</strong> не учтены депозит, пролонгация и некоторые акции. 
-            Ваш доход может быть выше за счёт дополнительных бонусов (Наставник, Мастер, Советник и т.д.).`;
-            if (pkgKey === 'client') {
-                note += ' <span style="color:#c0392b;">Клиентский пакет не даёт доступа к бинарному и матчинг-бонусам.</span>';
-            }
-            noteBox.innerHTML = note;
+        } else {
+            matchingPV = match1;
         }
+    }
+
+    // --- Бонусы за статусы (упрощённо) ---
+    const statusPV = structPV * pkg.statusBonusRate;
+
+    // --- Итог ---
+    const total = personalPV + binaryPV + matchingPV + statusPV;
+    const totalRubVal = total * rate;
+
+    // Отображение
+    personalBonusPV.textContent = personalPV.toFixed(2);
+    binaryBonusPV.textContent = binaryPV.toFixed(2);
+    matchingBonusPV.textContent = matchingPV.toFixed(2);
+    statusBonusPV.textContent = statusPV.toFixed(2);
+    totalPV.textContent = total.toFixed(2);
+    totalRub.textContent = totalRubVal.toFixed(2) + ' ₽';
+
+    // Примечание с пояснением об активации бинара
+    let note = `⚡ <strong>Расчёт консервативный:</strong> не учтены депозит, пролонгация и некоторые акции. 
+    Ваш доход может быть выше за счёт дополнительных бонусов (Наставник, Мастер, Советник и т.д.).`;
+    if (pkgKey === 'client') {
+        note += ' <span style="color:#c0392b;">Клиентский пакет не даёт доступа к бинарному и матчинг-бонусам.</span>';
+    }
+    if (personalCount < 3) {
+        note += ' <span style="color:#c0392b;">Бинарный и матчинг-бонусы начисляются только при активации бинара — минимум 3 личных приглашения на пакет «Партнёрский».</span>';
+    }
+    noteBox.innerHTML = note;
+}
 
         calcBtn.addEventListener('click', calculate);
 
