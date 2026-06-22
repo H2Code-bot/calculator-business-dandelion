@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор дохода Dandelion</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .calculator {
+            max-width: 700px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.05);
+            padding: 30px 28px 20px;
+            transition: 0.3s;
+        }
+        .calculator h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a2634;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .calculator h1 span {
+            background: #f6c445;
+            font-size: 20px;
+            padding: 0 12px;
+            border-radius: 40px;
+            color: #1a2634;
+        }
+        .subhead {
+            color: #5e6f8d;
+            font-size: 15px;
+            margin-bottom: 24px;
+            border-left: 4px solid #f6c445;
+            padding-left: 14px;
+            background: #fafbfc;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.5;
+        }
+        .subhead a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .subhead a:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+        .form-group .hint {
+            font-weight: 400;
+            font-size: 13px;
+            color: #7a8a9e;
+            margin-left: 8px;
+        }
+        .package-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .package-option {
+            position: relative;
+            background: #f8f9fc;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a2634;
+        }
+        .package-option:hover {
+            background: #eef1f7;
+            border-color: #cbd5e1;
+        }
+        .package-option input[type="radio"] {
+            display: none;
+        }
+        .package-option.selected {
+            border-color: #f6c445;
+            background: #fff8e7;
+            box-shadow: 0 0 0 3px rgba(246, 196, 69, 0.2);
+        }
+        .package-option .pkg-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .package-option .pkg-detail {
+            font-size: 12px;
+            color: #5e6f8d;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+        .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .input-row .field {
+            flex: 1 1 200px;
+        }
+        .field input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 16px;
+            background: #fafbfc;
+            transition: 0.2s;
+            color: #1a2634;
+        }
+        .field input:focus {
+            border-color: #f6c445;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(246, 196, 69, 0.15);
+        }
+        .field input::placeholder {
+            color: #aab7cc;
+            font-weight: 400;
+        }
+        .currency-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+        .currency-row label {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        .currency-row input {
+            width: 100px;
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #fafbfc;
+        }
+        .currency-row input:focus {
+            border-color: #f6c445;
+            outline: none;
+        }
+        .btn-calc {
+            width: 100%;
+            padding: 14px;
+            background: #f6c445;
+            border: none;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a2634;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+            letter-spacing: 0.3px;
+        }
+        .btn-calc:hover {
+            background: #eab832;
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(246, 196, 69, 0.3);
+        }
+        .btn-calc:active {
+            transform: scale(0.98);
+        }
+        .result {
+            margin-top: 28px;
+            padding: 20px 22px;
+            background: #f8fafc;
+            border-radius: 20px;
+            border: 1px solid #eef2f6;
+        }
+        .result .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e6ecf3;
+            font-size: 15px;
+        }
+        .result .row:last-child {
+            border-bottom: none;
+        }
+        .result .row .label {
+            color: #4a5b72;
+        }
+        .result .row .value {
+            font-weight: 600;
+            color: #1a2634;
+        }
+        .result .row .value.highlight {
+            color: #1a73e8;
+            font-size: 17px;
+        }
+        .result .total {
+            margin-top: 12px;
+            padding-top: 14px;
+            border-top: 2px dashed #dce3ed;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2634;
+        }
+        .result .total .value {
+            color: #1a73e8;
+            font-size: 24px;
+        }
+        .result .total .value.rub {
+            color: #0f9d58;
+        }
+        .result .note {
+            margin-top: 14px;
+            font-size: 13px;
+            color: #7a8a9e;
+            background: #eef3f9;
+            padding: 10px 14px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        .result .note strong {
+            color: #1a2634;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #5e6f8d;
+            border-top: 1px solid #edf2f7;
+            padding-top: 18px;
+        }
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .bot-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #e8edf5;
+            padding: 6px 18px 6px 14px;
+            border-radius: 40px;
+            margin-top: 6px;
+            font-weight: 500;
+            color: #1a2634;
+            transition: 0.2s;
+        }
+        .footer .bot-link:hover {
+            background: #dce3ef;
+            text-decoration: none;
+        }
+        .footer .bot-link img {
+            width: 20px;
+            height: 20px;
+        }
+        @media (max-width: 500px) {
+            .calculator {
+                padding: 20px 16px;
+            }
+            .package-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .input-row .field {
+                flex: 1 1 100%;
+            }
+            .result .total {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>
+            🌼 Dandelion
+            <span>PV</span>
+        </h1>
+        <div class="subhead">
+            💰 Калькулятор дохода &nbsp;·&nbsp; Личный + бинарный бонусы <br>
+            <span style="font-size:13px; color:#5e6f8d;">1 PV ≈ 100 ₽ &nbsp;·&nbsp; Все выплаты официальные</span>
+        </div>
+
+        <form id="calcForm">
+            <!-- Выбор пакета -->
+            <div class="form-group">
+                <label>Ваш стартовый пакет</label>
+                <div class="package-selector" id="packageSelector">
+                    <label class="package-option" data-pkg="client">
+                        <input type="radio" name="package" value="client" checked>
+                        <div class="pkg-name">Клиентский</div>
+                        <div class="pkg-detail">личный 5%<br>бинар 0%</div>
+                    </label>
+                    <label class="package-option" data-pkg="partner">
+                        <input type="radio" name="package" value="partner">
+                        <div class="pkg-name">Партнёрский</div>
+                        <div class="pkg-detail">личный 10%<br>бинар 6% (до 500 PV)</div>
+                    </label>
+                    <label class="package-option" data-pkg="business">
+                        <input type="radio" name="package" value="business">
+                        <div class="pkg-name">Бизнес</div>
+                        <div class="pkg-detail">личный 12%<br>бинар 6% (до 1000 PV)</div>
+                    </label>
+                    <label class="package-option" data-pkg="elite">
+                        <input type="radio" name="package" value="elite">
+                        <div class="pkg-name">Элит</div>
+                        <div class="pkg-detail">личный 15%<br>бинар 8% (до 2000 PV)</div>
+                    </label>
+                    <label class="package-option" data-pkg="vip">
+                        <input type="radio" name="package" value="vip">
+                        <div class="pkg-name">VIP</div>
+                        <div class="pkg-detail">личный 20%<br>бинар 10% (до 8000 PV)</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Поля ввода -->
+            <div class="form-group">
+                <label>Объём личных продаж <span class="hint">(PV)</span></label>
+                <div class="input-row">
+                    <div class="field">
+                        <input type="number" id="personalPV" placeholder="например, 500" min="0" step="1" value="500">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Объём меньшей ветки <span class="hint">(PV) — для бинарного бонуса</span></label>
+                <div class="input-row">
+                    <div class="field">
+                        <input type="number" id="smallerLegPV" placeholder="например, 300" min="0" step="1" value="300">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Курс -->
+            <div class="form-group">
+                <div class="currency-row">
+                    <label>Курс 1 PV = </label>
+                    <input type="number" id="exchangeRate" value="100" step="1" min="1">
+                    <span style="font-weight:500; color:#2c3e50;">руб.</span>
+                </div>
+            </div>
+
+            <button type="button" class="btn-calc" id="calcBtn">📊 Рассчитать доход</button>
+        </form>
+
+        <!-- Результат -->
+        <div class="result" id="resultBox">
+            <div class="row">
+                <span class="label">📦 Личный бонус (PV)</span>
+                <span class="value" id="personalBonusPV">0</span>
+            </div>
+            <div class="row">
+                <span class="label">👥 Бинарный бонус (PV)</span>
+                <span class="value" id="binaryBonusPV">0</span>
+            </div>
+            <div class="row" style="border-bottom: 2px solid #dce3ed; padding-bottom: 14px;">
+                <span class="label">📌 Лимит бинарного (PV)</span>
+                <span class="value" id="binaryLimitDisplay">0</span>
+            </div>
+            <div class="total">
+                <span>💰 Итого (PV)</span>
+                <span class="value" id="totalPV">0</span>
+            </div>
+            <div class="total" style="border-top: none; padding-top: 0; margin-top: 0;">
+                <span>💵 Итого (руб.)</span>
+                <span class="value rub" id="totalRub">0</span>
+            </div>
+            <div class="note" id="noteBox">
+                ⚡ <strong>Бинарный бонус</strong> начисляется с объёма меньшей ветки, но не выше лимита вашего пакета.
+            </div>
+        </div>
+
+        <div class="footer">
+            <div style="margin-bottom: 6px;">
+                📎 Полный маркетинг-план — в ЛК после регистрации.
+            </div>
+            <div>
+                🤖 Автоматизация бизнеса в Dandelion <a href="https://t.me/h2code_bot" target="_blank">@h2code_bot</a>
+                <span style="display:inline-block; margin-left: 8px; background: #f6c445; border-radius: 40px; padding: 2px 12px; font-size:12px; font-weight:600; color:#1a2634;">С встроенным ИИ-Консультантом</span>
+            </div>
+            <div style="margin-top: 8px; font-size:13px; color:#8a9bb0;">
+                Бесплатный калькулятор для партнёров Dandelion
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Данные по пакетам
+            const packages = {
+                client: {
+                    label: 'Клиентский',
+                    personalPercent: 0.05,
+                    binaryPercent: 0,
+                    binaryLimit: 0,
+                },
+                partner: {
+                    label: 'Партнёрский',
+                    personalPercent: 0.10,
+                    binaryPercent: 0.06,
+                    binaryLimit: 500,
+                },
+                business: {
+                    label: 'Бизнес',
+                    personalPercent: 0.12,
+                    binaryPercent: 0.06,
+                    binaryLimit: 1000,
+                },
+                elite: {
+                    label: 'Элит',
+                    personalPercent: 0.15,
+                    binaryPercent: 0.08,
+                    binaryLimit: 2000,
+                },
+                vip: {
+                    label: 'VIP',
+                    personalPercent: 0.20,
+                    binaryPercent: 0.10,
+                    binaryLimit: 8000,
+                }
+            };
+
+            // Элементы
+            const packageRadios = document.querySelectorAll('input[name="package"]');
+            const packageOptions = document.querySelectorAll('.package-option');
+            const personalInput = document.getElementById('personalPV');
+            const smallerLegInput = document.getElementById('smallerLegPV');
+            const rateInput = document.getElementById('exchangeRate');
+            const calcBtn = document.getElementById('calcBtn');
+
+            const personalBonusPV = document.getElementById('personalBonusPV');
+            const binaryBonusPV = document.getElementById('binaryBonusPV');
+            const binaryLimitDisplay = document.getElementById('binaryLimitDisplay');
+            const totalPV = document.getElementById('totalPV');
+            const totalRub = document.getElementById('totalRub');
+            const noteBox = document.getElementById('noteBox');
+
+            // Выделение пакета
+            function updatePackageSelection() {
+                let selected = document.querySelector('input[name="package"]:checked');
+                if (!selected) return;
+                const val = selected.value;
+                packageOptions.forEach(opt => {
+                    const pkg = opt.dataset.pkg;
+                    if (pkg === val) {
+                        opt.classList.add('selected');
+                    } else {
+                        opt.classList.remove('selected');
+                    }
+                });
+            }
+
+            packageRadios.forEach(radio => {
+                radio.addEventListener('change', updatePackageSelection);
+            });
+            // Инициализация
+            updatePackageSelection();
+
+            // Основной расчёт
+            function calculate() {
+                // Получаем выбранный пакет
+                const selected = document.querySelector('input[name="package"]:checked');
+                if (!selected) return;
+                const pkgKey = selected.value;
+                const pkg = packages[pkgKey];
+                if (!pkg) return;
+
+                // Чтение значений
+                let personal = parseFloat(personalInput.value) || 0;
+                let smallerLeg = parseFloat(smallerLegInput.value) || 0;
+                let rate = parseFloat(rateInput.value) || 100;
+                if (rate < 0.01) rate = 0.01;
+
+                // Личный бонус
+                const personalBonus = personal * pkg.personalPercent;
+
+                // Бинарный бонус
+                let binaryBonus = 0;
+                let usedLeg = 0;
+                if (pkg.binaryPercent > 0 && pkg.binaryLimit > 0) {
+                    // Ограничиваем объём меньшей ветки лимитом пакета
+                    const limitedLeg = Math.min(smallerLeg, pkg.binaryLimit);
+                    binaryBonus = limitedLeg * pkg.binaryPercent;
+                    usedLeg = limitedLeg;
+                } else {
+                    usedLeg = 0;
+                }
+
+                // Итоги в PV
+                const totalPVValue = personalBonus + binaryBonus;
+
+                // Отображение
+                personalBonusPV.textContent = personalBonus.toFixed(2);
+                binaryBonusPV.textContent = binaryBonus.toFixed(2);
+                binaryLimitDisplay.textContent = pkg.binaryLimit > 0 ? pkg.binaryLimit + ' PV' : 'нет';
+                totalPV.textContent = totalPVValue.toFixed(2);
+                const rubTotal = totalPVValue * rate;
+                totalRub.textContent = rubTotal.toFixed(2) + ' ₽';
+
+                // Доп. заметка
+                let noteText = '';
+                if (pkg.binaryLimit > 0) {
+                    noteText = `⚡ <strong>Бинарный бонус</strong> (${pkg.binaryPercent * 100}%) начислен с ${usedLeg.toFixed(2)} PV (ограничение пакета — ${pkg.binaryLimit} PV).`;
+                    if (smallerLeg > pkg.binaryLimit) {
+                        noteText += ` <span style="color:#c0392b;">Объём ветки ${smallerLeg} PV превышает лимит, учтено только ${pkg.binaryLimit} PV.</span>`;
+                    }
+                } else {
+                    noteText = `⚠️ Для пакета «${pkg.label}» бинарный бонус не начисляется.`;
+                }
+                noteBox.innerHTML = noteText;
+            }
+
+            // Обработчики
+            calcBtn.addEventListener('click', calculate);
+
+            // Автоматический расчёт при изменении полей (с задержкой)
+            const inputs = [personalInput, smallerLegInput, rateInput];
+            inputs.forEach(inp => {
+                inp.addEventListener('input', function() {
+                    // Небольшая задержка для удобства
+                    clearTimeout(window._calcTimeout);
+                    window._calcTimeout = setTimeout(calculate, 300);
+                });
+            });
+
+            // Пересчёт при смене пакета
+            packageRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    calculate();
+                });
+            });
+
+            // Первый расчёт при загрузке
+            window.addEventListener('load', function() {
+                calculate();
+            });
+
+        })();
+    </script>
+</body>
+</html>
