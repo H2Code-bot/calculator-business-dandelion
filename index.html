@@ -3,7 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор дохода Dandelion</title>
+    <title>Калькулятор дохода Dandelion — Сколько заработать в бинарном маркетинге с ИИ-автоматизацией</title>
+    <meta name="description" content="Рассчитайте свой доход в Dandelion за 3 месяца с учётом личных бонусов, бинарной системы, матчинга и дупликации. Узнайте, как ИИ-бот @H2Code_bot увеличит ваш заработок.">
+    <meta name="keywords" content="калькулятор дохода Dandelion, бинарный маркетинг, дупликация, MLM, заработок в интернете, ИИ-бот, автоматизация бизнеса">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://h2code-bot.github.io/calculator-business-dandelion/">
+
+    <!-- Open Graph для соцсетей -->
+    <meta property="og:title" content="Калькулятор дохода Dandelion — Прогноз на 3 месяца">
+    <meta property="og:description" content="Рассчитайте, сколько вы заработаете в Dandelion с ИИ-автоматизацией @H2Code_bot">
+    <meta property="og:image" content="https://h2code-bot.github.io/calculator-business-dandelion/og-image.jpg">
+    <meta property="og:url" content="https://h2code-bot.github.io/calculator-business-dandelion/">
+
+    <!-- Schema.org (JSON-LD) для SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Калькулятор дохода Dandelion",
+      "description": "Интерактивный калькулятор для расчёта дохода в бинарном маркетинге с учётом дупликации, матчинга и бонусов",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Требуется современный браузер",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB"
+      }
+    }
+    </script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -16,11 +45,11 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 20px;
         }
-        .calculator {
-            max-width: 700px;
+        .wrapper {
+            max-width: 820px;
             width: 100%;
             background: #ffffff;
             border-radius: 28px;
@@ -28,21 +57,23 @@
             padding: 30px 28px 20px;
             transition: 0.3s;
         }
-        .calculator h1 {
-            font-size: 26px;
+        h1 {
+            font-size: 28px;
             font-weight: 700;
             color: #1a2634;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 6px;
+            flex-wrap: wrap;
         }
-        .calculator h1 span {
+        h1 .badge {
             background: #f6c445;
-            font-size: 20px;
-            padding: 0 12px;
+            font-size: 18px;
+            padding: 0 16px;
             border-radius: 40px;
             color: #1a2634;
+            font-weight: 600;
         }
         .subhead {
             color: #5e6f8d;
@@ -62,6 +93,7 @@
         .subhead a:hover {
             text-decoration: underline;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -80,7 +112,7 @@
         }
         .package-selector {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 10px;
             margin-top: 4px;
         }
@@ -93,7 +125,7 @@
             text-align: center;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #1a2634;
         }
@@ -114,11 +146,12 @@
             font-size: 15px;
         }
         .package-option .pkg-detail {
-            font-size: 12px;
+            font-size: 11px;
             color: #5e6f8d;
             margin-top: 4px;
             line-height: 1.3;
         }
+
         .input-row {
             display: flex;
             flex-wrap: wrap;
@@ -127,7 +160,8 @@
         .input-row .field {
             flex: 1 1 200px;
         }
-        .field input {
+        .field input,
+        .field select {
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #e2e8f0;
@@ -137,40 +171,14 @@
             transition: 0.2s;
             color: #1a2634;
         }
-        .field input:focus {
+        .field input:focus,
+        .field select:focus {
             border-color: #f6c445;
             background: #fff;
             outline: none;
             box-shadow: 0 0 0 3px rgba(246, 196, 69, 0.15);
         }
-        .field input::placeholder {
-            color: #aab7cc;
-            font-weight: 400;
-        }
-        .currency-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 4px;
-        }
-        .currency-row label {
-            font-weight: 500;
-            color: #2c3e50;
-            font-size: 14px;
-        }
-        .currency-row input {
-            width: 100px;
-            padding: 8px 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 14px;
-            background: #fafbfc;
-        }
-        .currency-row input:focus {
-            border-color: #f6c445;
-            outline: none;
-        }
+
         .btn-calc {
             width: 100%;
             padding: 14px;
@@ -193,6 +201,7 @@
         .btn-calc:active {
             transform: scale(0.98);
         }
+
         .result {
             margin-top: 28px;
             padding: 20px 22px;
@@ -216,10 +225,6 @@
         .result .row .value {
             font-weight: 600;
             color: #1a2634;
-        }
-        .result .row .value.highlight {
-            color: #1a73e8;
-            font-size: 17px;
         }
         .result .total {
             margin-top: 12px;
@@ -250,328 +255,405 @@
         .result .note strong {
             color: #1a2634;
         }
-        .footer {
+
+        .cta-block {
             margin-top: 30px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #f6c445 0%, #f5b342 100%);
+            border-radius: 20px;
             text-align: center;
+            color: #1a2634;
+        }
+        .cta-block h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .cta-block p {
+            font-size: 16px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+        .btn-bot {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #1a2634;
+            color: #fff;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-bot:hover {
+            background: #2c3e50;
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        .btn-bot i {
+            margin-right: 8px;
+        }
+
+        .seo-text {
+            margin-top: 30px;
+            padding: 20px 0;
+            border-top: 1px solid #edf2f7;
             font-size: 14px;
             color: #5e6f8d;
+            line-height: 1.7;
+        }
+        .seo-text strong {
+            color: #1a2634;
+        }
+        .seo-text a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .seo-text a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #8a9bb0;
             border-top: 1px solid #edf2f7;
             padding-top: 18px;
         }
         .footer a {
             color: #1a73e8;
             text-decoration: none;
-            font-weight: 600;
         }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .footer .bot-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #e8edf5;
-            padding: 6px 18px 6px 14px;
-            border-radius: 40px;
-            margin-top: 6px;
-            font-weight: 500;
-            color: #1a2634;
-            transition: 0.2s;
-        }
-        .footer .bot-link:hover {
-            background: #dce3ef;
-            text-decoration: none;
-        }
-        .footer .bot-link img {
-            width: 20px;
-            height: 20px;
-        }
-        @media (max-width: 500px) {
-            .calculator {
-                padding: 20px 16px;
-            }
-            .package-selector {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .input-row .field {
-                flex: 1 1 100%;
-            }
-            .result .total {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
+
+        @media (max-width: 600px) {
+            .wrapper { padding: 20px 16px; }
+            .package-selector { grid-template-columns: repeat(2, 1fr); }
+            .input-row .field { flex: 1 1 100%; }
+            .result .total { flex-direction: column; align-items: flex-start; gap: 6px; }
+            h1 { font-size: 22px; }
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <h1>
-            🌼 Dandelion
-            <span>PV</span>
-        </h1>
-        <div class="subhead">
-            💰 Калькулятор дохода &nbsp;·&nbsp; Личный + бинарный бонусы <br>
-            <span style="font-size:13px; color:#5e6f8d;">1 PV ≈ 100 ₽ &nbsp;·&nbsp; Все выплаты официальные</span>
-        </div>
+<div class="wrapper">
 
-        <form id="calcForm">
-            <!-- Выбор пакета -->
-            <div class="form-group">
-                <label>Ваш стартовый пакет</label>
-                <div class="package-selector" id="packageSelector">
-                    <label class="package-option" data-pkg="client">
-                        <input type="radio" name="package" value="client" checked>
-                        <div class="pkg-name">Клиентский</div>
-                        <div class="pkg-detail">личный 5%<br>бинар 0%</div>
-                    </label>
-                    <label class="package-option" data-pkg="partner">
-                        <input type="radio" name="package" value="partner">
-                        <div class="pkg-name">Партнёрский</div>
-                        <div class="pkg-detail">личный 10%<br>бинар 6% (до 500 PV)</div>
-                    </label>
-                    <label class="package-option" data-pkg="business">
-                        <input type="radio" name="package" value="business">
-                        <div class="pkg-name">Бизнес</div>
-                        <div class="pkg-detail">личный 12%<br>бинар 6% (до 1000 PV)</div>
-                    </label>
-                    <label class="package-option" data-pkg="elite">
-                        <input type="radio" name="package" value="elite">
-                        <div class="pkg-name">Элит</div>
-                        <div class="pkg-detail">личный 15%<br>бинар 8% (до 2000 PV)</div>
-                    </label>
-                    <label class="package-option" data-pkg="vip">
-                        <input type="radio" name="package" value="vip">
-                        <div class="pkg-name">VIP</div>
-                        <div class="pkg-detail">личный 20%<br>бинар 10% (до 8000 PV)</div>
-                    </label>
-                </div>
-            </div>
+    <h1>
+        🌼 Dandelion
+        <span class="badge">Калькулятор дохода</span>
+    </h1>
+    <div class="subhead">
+        💰 Личный + бинарный + матчинг бонусы за 3 месяца<br>
+        <span style="font-size:13px; color:#5e6f8d;">1 PV ≈ 100 ₽ · Все бонусы официальные</span>
+    </div>
 
-            <!-- Поля ввода -->
-            <div class="form-group">
-                <label>Объём личных продаж <span class="hint">(PV)</span></label>
-                <div class="input-row">
-                    <div class="field">
-                        <input type="number" id="personalPV" placeholder="например, 500" min="0" step="1" value="500">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Объём меньшей ветки <span class="hint">(PV) — для бинарного бонуса</span></label>
-                <div class="input-row">
-                    <div class="field">
-                        <input type="number" id="smallerLegPV" placeholder="например, 300" min="0" step="1" value="300">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Курс -->
-            <div class="form-group">
-                <div class="currency-row">
-                    <label>Курс 1 PV = </label>
-                    <input type="number" id="exchangeRate" value="100" step="1" min="1">
-                    <span style="font-weight:500; color:#2c3e50;">руб.</span>
-                </div>
-            </div>
-
-            <button type="button" class="btn-calc" id="calcBtn">📊 Рассчитать доход</button>
-        </form>
-
-        <!-- Результат -->
-        <div class="result" id="resultBox">
-            <div class="row">
-                <span class="label">📦 Личный бонус (PV)</span>
-                <span class="value" id="personalBonusPV">0</span>
-            </div>
-            <div class="row">
-                <span class="label">👥 Бинарный бонус (PV)</span>
-                <span class="value" id="binaryBonusPV">0</span>
-            </div>
-            <div class="row" style="border-bottom: 2px solid #dce3ed; padding-bottom: 14px;">
-                <span class="label">📌 Лимит бинарного (PV)</span>
-                <span class="value" id="binaryLimitDisplay">0</span>
-            </div>
-            <div class="total">
-                <span>💰 Итого (PV)</span>
-                <span class="value" id="totalPV">0</span>
-            </div>
-            <div class="total" style="border-top: none; padding-top: 0; margin-top: 0;">
-                <span>💵 Итого (руб.)</span>
-                <span class="value rub" id="totalRub">0</span>
-            </div>
-            <div class="note" id="noteBox">
-                ⚡ <strong>Бинарный бонус</strong> начисляется с объёма меньшей ветки, но не выше лимита вашего пакета.
+    <!-- Форма калькулятора -->
+    <form id="calcForm">
+        <div class="form-group">
+            <label>Ваш стартовый пакет</label>
+            <div class="package-selector" id="packageSelector">
+                <label class="package-option" data-pkg="client">
+                    <input type="radio" name="package" value="client">
+                    <div class="pkg-name">Клиентский</div>
+                    <div class="pkg-detail">личный 5%<br>бинар 0%</div>
+                </label>
+                <label class="package-option" data-pkg="partner">
+                    <input type="radio" name="package" value="partner" checked>
+                    <div class="pkg-name">Партнёрский</div>
+                    <div class="pkg-detail">личный 10%<br>бинар 6%</div>
+                </label>
+                <label class="package-option" data-pkg="business">
+                    <input type="radio" name="package" value="business">
+                    <div class="pkg-name">Бизнес</div>
+                    <div class="pkg-detail">личный 12%<br>бинар 6%</div>
+                </label>
+                <label class="package-option" data-pkg="elite">
+                    <input type="radio" name="package" value="elite">
+                    <div class="pkg-name">Элит</div>
+                    <div class="pkg-detail">личный 15%<br>бинар 8%</div>
+                </label>
+                <label class="package-option" data-pkg="vip">
+                    <input type="radio" name="package" value="vip">
+                    <div class="pkg-name">VIP</div>
+                    <div class="pkg-detail">личный 20%<br>бинар 10%</div>
+                </label>
             </div>
         </div>
 
-        <div class="footer">
-            <div style="margin-bottom: 6px;">
-                📎 Полный маркетинг-план — в ЛК после регистрации.
+        <div class="form-group">
+            <label>Количество личных приглашений (партнёров за 3 месяца)</label>
+            <div class="input-row">
+                <div class="field">
+                    <input type="number" id="personalCount" value="10" min="0" step="1">
+                </div>
             </div>
-            <div>
-                🤖 Автоматизация бизнеса в Dandelion <a href="https://t.me/h2code_bot" target="_blank">@h2code_bot</a>
-                <span style="display:inline-block; margin-left: 8px; background: #f6c445; border-radius: 40px; padding: 2px 12px; font-size:12px; font-weight:600; color:#1a2634;">С встроенным ИИ-Консультантом</span>
+        </div>
+
+        <div class="form-group">
+            <label>Коэффициент дупликации (какой % партнёров повторят ваш результат?)</label>
+            <div class="input-row">
+                <div class="field">
+                    <select id="duplicationRate">
+                        <option value="0.25">25% (каждый четвёртый)</option>
+                        <option value="0.5" selected>50% (каждый второй)</option>
+                        <option value="0.75">75% (высокая дупликация)</option>
+                        <option value="1.0">100% (идеальная дупликация)</option>
+                    </select>
+                </div>
             </div>
-            <div style="margin-top: 8px; font-size:13px; color:#8a9bb0;">
-                Бесплатный калькулятор для партнёров Dandelion
+        </div>
+
+        <div class="form-group">
+            <label>Средний чек партнёра (PV)</label>
+            <div class="input-row">
+                <div class="field">
+                    <input type="number" id="avgCheck" value="120" min="1" step="1">
+                </div>
             </div>
+        </div>
+
+        <div class="form-group">
+            <label>Курс 1 PV = </label>
+            <div class="input-row">
+                <div class="field" style="flex: 0 0 120px;">
+                    <input type="number" id="exchangeRate" value="100" min="1" step="1">
+                </div>
+                <span style="font-weight:500; color:#2c3e50; align-self:center;">руб.</span>
+            </div>
+        </div>
+
+        <button type="button" class="btn-calc" id="calcBtn">📊 Рассчитать доход за 3 месяца</button>
+    </form>
+
+    <!-- Блок результатов -->
+    <div class="result" id="resultBox">
+        <div class="row">
+            <span class="label">👤 Личный бонус (PV)</span>
+            <span class="value" id="personalBonusPV">0</span>
+        </div>
+        <div class="row">
+            <span class="label">👥 Бинарный бонус (PV)</span>
+            <span class="value" id="binaryBonusPV">0</span>
+        </div>
+        <div class="row">
+            <span class="label">📈 Матчинг-бонус (чек от чека) (PV)</span>
+            <span class="value" id="matchingBonusPV">0</span>
+        </div>
+        <div class="row" style="border-bottom: 2px solid #dce3ed; padding-bottom: 14px;">
+            <span class="label">🏆 Бонусы за статусы (PV)</span>
+            <span class="value" id="statusBonusPV">0</span>
+        </div>
+        <div class="total">
+            <span>💰 Итого (PV)</span>
+            <span class="value" id="totalPV">0</span>
+        </div>
+        <div class="total" style="border-top: none; padding-top: 0; margin-top: 0;">
+            <span>💵 Итого (руб.)</span>
+            <span class="value rub" id="totalRub">0</span>
+        </div>
+        <div class="note" id="noteBox">
+            ⚡ <strong>Расчёт консервативный</strong> — не учтены депозит, пролонгация и некоторые промо-бонусы.
         </div>
     </div>
 
-    <script>
-        (function() {
-            // Данные по пакетам
-            const packages = {
-                client: {
-                    label: 'Клиентский',
-                    personalPercent: 0.05,
-                    binaryPercent: 0,
-                    binaryLimit: 0,
-                },
-                partner: {
-                    label: 'Партнёрский',
-                    personalPercent: 0.10,
-                    binaryPercent: 0.06,
-                    binaryLimit: 500,
-                },
-                business: {
-                    label: 'Бизнес',
-                    personalPercent: 0.12,
-                    binaryPercent: 0.06,
-                    binaryLimit: 1000,
-                },
-                elite: {
-                    label: 'Элит',
-                    personalPercent: 0.15,
-                    binaryPercent: 0.08,
-                    binaryLimit: 2000,
-                },
-                vip: {
-                    label: 'VIP',
-                    personalPercent: 0.20,
-                    binaryPercent: 0.10,
-                    binaryLimit: 8000,
-                }
-            };
+    <!-- Блок призыва к боту -->
+    <div class="cta-block">
+        <h3>🚀 Хотите получить такой же ИИ-бот в подарок?</h3>
+        <p>Перейдите в @H2Code_bot, пройдите бизнес-симулятор и узнайте, как автоматизация удваивает ваш доход.</p>
+        <a href="https://t.me/H2Code_bot?start=RU-804kb" class="btn-bot" target="_blank">🤖 Перейти в бот →</a>
+    </div>
 
-            // Элементы
-            const packageRadios = document.querySelectorAll('input[name="package"]');
-            const packageOptions = document.querySelectorAll('.package-option');
-            const personalInput = document.getElementById('personalPV');
-            const smallerLegInput = document.getElementById('smallerLegPV');
-            const rateInput = document.getElementById('exchangeRate');
-            const calcBtn = document.getElementById('calcBtn');
+    <!-- SEO-текст с ключевыми словами и описанием механик -->
+    <div class="seo-text">
+        <h2 style="font-size:18px; color:#1a2634; margin-bottom:8px;">Как работает калькулятор дохода Dandelion</h2>
+        <p>
+            <strong>Калькулятор дохода Dandelion</strong> помогает оценить <strong>заработок в бинарном маркетинге</strong> с учётом трёх ключевых факторов:
+            <strong>личных продаж</strong> (личный бонус), <strong>оборота структуры</strong> (бинарный бонус) и
+            <strong>дупликации</strong> (матчинг-бонус от партнёров). Вы выбираете стартовый пакет, количество приглашений
+            и коэффициент дупликации – и получаете прогноз на 3 месяца.
+        </p>
+        <p>
+            💡 <strong>Почему пакет влияет на доход?</strong> С каждым уровнем пакета растёт процент личного и бинарного
+            бонуса, а также открываются более высокие лимиты выплат и доступ к дополнительным бонусам (Наставник, Мастер, Советник и др.).
+        </p>
+        <p>
+            🤖 <strong>Искусственный интеллект в Dandelion</strong> — это не просто автоматизация, а полноценный
+            <strong>ИИ-консультант</strong>, который общается с вашими клиентами 24/7, проводит тесты здоровья, подбирает
+            продукты и отвечает на вопросы. Встроенный <strong>ротатор трафика</strong> распределяет новых лидов между
+            партнёрами по их рейтингу, а система <strong>дупликации</strong> позволяет новичкам повторять успех лидера.
+        </p>
+        <p>
+            🔗 Узнайте точные цифры для вашей структуры — пройдите <a href="https://t.me/H2Code_bot?start=RU-804kb" target="_blank">бизнес-симулятор в @H2Code_bot</a>
+            и получите персонализированный план выхода на $1500+ в месяц.
+        </p>
+    </div>
 
-            const personalBonusPV = document.getElementById('personalBonusPV');
-            const binaryBonusPV = document.getElementById('binaryBonusPV');
-            const binaryLimitDisplay = document.getElementById('binaryLimitDisplay');
-            const totalPV = document.getElementById('totalPV');
-            const totalRub = document.getElementById('totalRub');
-            const noteBox = document.getElementById('noteBox');
+    <div class="footer">
+        © Dandelion — официальный маркетинг-план · Все расчёты приблизительны
+        <br><a href="https://t.me/H2Code_bot" target="_blank">@H2Code_bot</a> — ваш ИИ-ассистент в бизнесе
+    </div>
+</div>
 
-            // Выделение пакета
-            function updatePackageSelection() {
-                let selected = document.querySelector('input[name="package"]:checked');
-                if (!selected) return;
-                const val = selected.value;
-                packageOptions.forEach(opt => {
-                    const pkg = opt.dataset.pkg;
-                    if (pkg === val) {
-                        opt.classList.add('selected');
+<script>
+    (function() {
+        // Данные по пакетам (реальные проценты из маркетинг-плана)
+        const packages = {
+            client: {
+                label: 'Клиентский',
+                personalPercent: 0.05,
+                binaryPercent: 0,
+                matchingLevels: 0,
+                statusBonusRate: 0
+            },
+            partner: {
+                label: 'Партнёрский',
+                personalPercent: 0.10,
+                binaryPercent: 0.06,
+                matchingLevels: 1,      // 1-й уровень
+                statusBonusRate: 0.03    // примерный бонус за статусы (в % от оборота)
+            },
+            business: {
+                label: 'Бизнес',
+                personalPercent: 0.12,
+                binaryPercent: 0.06,
+                matchingLevels: 2,
+                statusBonusRate: 0.05
+            },
+            elite: {
+                label: 'Элит',
+                personalPercent: 0.15,
+                binaryPercent: 0.08,
+                matchingLevels: 3,
+                statusBonusRate: 0.08
+            },
+            vip: {
+                label: 'VIP',
+                personalPercent: 0.20,
+                binaryPercent: 0.10,
+                matchingLevels: 3,
+                statusBonusRate: 0.12
+            }
+        };
+
+        // DOM-элементы
+        const packageRadios = document.querySelectorAll('input[name="package"]');
+        const packageOptions = document.querySelectorAll('.package-option');
+        const personalCountInput = document.getElementById('personalCount');
+        const duplicationSelect = document.getElementById('duplicationRate');
+        const avgCheckInput = document.getElementById('avgCheck');
+        const rateInput = document.getElementById('exchangeRate');
+        const calcBtn = document.getElementById('calcBtn');
+
+        const personalBonusPV = document.getElementById('personalBonusPV');
+        const binaryBonusPV = document.getElementById('binaryBonusPV');
+        const matchingBonusPV = document.getElementById('matchingBonusPV');
+        const statusBonusPV = document.getElementById('statusBonusPV');
+        const totalPV = document.getElementById('totalPV');
+        const totalRub = document.getElementById('totalRub');
+        const noteBox = document.getElementById('noteBox');
+
+        function updatePackageSelection() {
+            const selected = document.querySelector('input[name="package"]:checked');
+            if (!selected) return;
+            const val = selected.value;
+            packageOptions.forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.pkg === val);
+            });
+        }
+        packageRadios.forEach(radio => radio.addEventListener('change', updatePackageSelection));
+        updatePackageSelection();
+
+        function calculate() {
+            const selected = document.querySelector('input[name="package"]:checked');
+            if (!selected) return;
+            const pkgKey = selected.value;
+            const pkg = packages[pkgKey];
+            if (!pkg) return;
+
+            const personalCount = parseInt(personalCountInput.value) || 0;
+            const dup = parseFloat(duplicationSelect.value) || 0.5;
+            const avgCheck = parseFloat(avgCheckInput.value) || 120;
+            const rate = parseFloat(rateInput.value) || 100;
+
+            // --- Личный бонус ---
+            const personalPV = personalCount * avgCheck * pkg.personalPercent;
+
+            // --- Бинарный бонус (дупликация на 2 уровня) ---
+            // 1-й уровень: личные приглашения * dup
+            const level1 = personalCount * dup;
+            // 2-й уровень: level1 * dup
+            const level2 = level1 * dup;
+            const totalBinaryMembers = personalCount + level1 + level2;
+            // Общий объём структуры (PV)
+            const structPV = totalBinaryMembers * avgCheck;
+            // Бинарный бонус начисляется с меньшей ветки (принимаем 50% от общего объёма)
+            const smallerLegPV = structPV * 0.5;
+            const binaryPV = smallerLegPV * pkg.binaryPercent;
+
+            // --- Матчинг-бонус (чек от чека) ---
+            let matchingPV = 0;
+            if (pkg.matchingLevels > 0) {
+                // Принимаем, что каждый партнёр 1-го уровня генерирует бинарный бонус, равный бинарному бонусу лидера * dup
+                const partnerBinary = binaryPV * dup; // средний бинарный бонус одного партнёра 1-го уровня
+                const level1Partners = personalCount * dup;
+                // Матчинг на 1-й уровень
+                let match1 = partnerBinary * 0.05 * level1Partners;
+                if (pkg.matchingLevels >= 2) {
+                    const level2Partners = level1Partners * dup;
+                    let match2 = partnerBinary * 0.03 * level2Partners;
+                    if (pkg.matchingLevels >= 3) {
+                        const level3Partners = level2Partners * dup;
+                        let match3 = partnerBinary * 0.02 * level3Partners;
+                        matchingPV = match1 + match2 + match3;
                     } else {
-                        opt.classList.remove('selected');
-                    }
-                });
-            }
-
-            packageRadios.forEach(radio => {
-                radio.addEventListener('change', updatePackageSelection);
-            });
-            // Инициализация
-            updatePackageSelection();
-
-            // Основной расчёт
-            function calculate() {
-                // Получаем выбранный пакет
-                const selected = document.querySelector('input[name="package"]:checked');
-                if (!selected) return;
-                const pkgKey = selected.value;
-                const pkg = packages[pkgKey];
-                if (!pkg) return;
-
-                // Чтение значений
-                let personal = parseFloat(personalInput.value) || 0;
-                let smallerLeg = parseFloat(smallerLegInput.value) || 0;
-                let rate = parseFloat(rateInput.value) || 100;
-                if (rate < 0.01) rate = 0.01;
-
-                // Личный бонус
-                const personalBonus = personal * pkg.personalPercent;
-
-                // Бинарный бонус
-                let binaryBonus = 0;
-                let usedLeg = 0;
-                if (pkg.binaryPercent > 0 && pkg.binaryLimit > 0) {
-                    // Ограничиваем объём меньшей ветки лимитом пакета
-                    const limitedLeg = Math.min(smallerLeg, pkg.binaryLimit);
-                    binaryBonus = limitedLeg * pkg.binaryPercent;
-                    usedLeg = limitedLeg;
-                } else {
-                    usedLeg = 0;
-                }
-
-                // Итоги в PV
-                const totalPVValue = personalBonus + binaryBonus;
-
-                // Отображение
-                personalBonusPV.textContent = personalBonus.toFixed(2);
-                binaryBonusPV.textContent = binaryBonus.toFixed(2);
-                binaryLimitDisplay.textContent = pkg.binaryLimit > 0 ? pkg.binaryLimit + ' PV' : 'нет';
-                totalPV.textContent = totalPVValue.toFixed(2);
-                const rubTotal = totalPVValue * rate;
-                totalRub.textContent = rubTotal.toFixed(2) + ' ₽';
-
-                // Доп. заметка
-                let noteText = '';
-                if (pkg.binaryLimit > 0) {
-                    noteText = `⚡ <strong>Бинарный бонус</strong> (${pkg.binaryPercent * 100}%) начислен с ${usedLeg.toFixed(2)} PV (ограничение пакета — ${pkg.binaryLimit} PV).`;
-                    if (smallerLeg > pkg.binaryLimit) {
-                        noteText += ` <span style="color:#c0392b;">Объём ветки ${smallerLeg} PV превышает лимит, учтено только ${pkg.binaryLimit} PV.</span>`;
+                        matchingPV = match1 + match2;
                     }
                 } else {
-                    noteText = `⚠️ Для пакета «${pkg.label}» бинарный бонус не начисляется.`;
+                    matchingPV = match1;
                 }
-                noteBox.innerHTML = noteText;
             }
 
-            // Обработчики
-            calcBtn.addEventListener('click', calculate);
+            // --- Бонусы за статусы (упрощённо) ---
+            // Чем выше пакет, тем больше процент от оборота (за счёт доступа к более высоким статусам)
+            const statusPV = structPV * pkg.statusBonusRate;
 
-            // Автоматический расчёт при изменении полей (с задержкой)
-            const inputs = [personalInput, smallerLegInput, rateInput];
-            inputs.forEach(inp => {
-                inp.addEventListener('input', function() {
-                    // Небольшая задержка для удобства
-                    clearTimeout(window._calcTimeout);
-                    window._calcTimeout = setTimeout(calculate, 300);
-                });
+            // --- Итог ---
+            const total = personalPV + binaryPV + matchingPV + statusPV;
+            const totalRubVal = total * rate;
+
+            // Отображение
+            personalBonusPV.textContent = personalPV.toFixed(2);
+            binaryBonusPV.textContent = binaryPV.toFixed(2);
+            matchingBonusPV.textContent = matchingPV.toFixed(2);
+            statusBonusPV.textContent = statusPV.toFixed(2);
+            totalPV.textContent = total.toFixed(2);
+            totalRub.textContent = totalRubVal.toFixed(2) + ' ₽';
+
+            // Примечание
+            let note = `⚡ <strong>Расчёт консервативный:</strong> не учтены депозит, пролонгация и некоторые акции. 
+            Ваш доход может быть выше за счёт дополнительных бонусов (Наставник, Мастер, Советник и т.д.).`;
+            if (pkgKey === 'client') {
+                note += ' <span style="color:#c0392b;">Клиентский пакет не даёт доступа к бинарному и матчинг-бонусам.</span>';
+            }
+            noteBox.innerHTML = note;
+        }
+
+        calcBtn.addEventListener('click', calculate);
+
+        // Авторасчёт при изменении полей
+        const inputs = [personalCountInput, duplicationSelect, avgCheckInput, rateInput];
+        inputs.forEach(inp => {
+            inp.addEventListener('input', function() {
+                clearTimeout(window._calcTimeout);
+                window._calcTimeout = setTimeout(calculate, 300);
             });
+        });
+        packageRadios.forEach(radio => radio.addEventListener('change', calculate));
 
-            // Пересчёт при смене пакета
-            packageRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    calculate();
-                });
-            });
-
-            // Первый расчёт при загрузке
-            window.addEventListener('load', function() {
-                calculate();
-            });
-
-        })();
-    </script>
+        window.addEventListener('load', calculate);
+    })();
+</script>
 </body>
 </html>
