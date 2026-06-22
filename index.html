@@ -9,13 +9,11 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://h2code-bot.github.io/calculator-business-dandelion/">
 
-    <!-- Open Graph для соцсетей -->
     <meta property="og:title" content="Калькулятор дохода Dandelion — Прогноз на 3 месяца">
     <meta property="og:description" content="Рассчитайте, сколько вы заработаете в Dandelion с ИИ-автоматизацией @H2Code_bot">
-    <meta property="og:image" content="https://h2code-bot.github.io/calculator-business-dandelion/Калькулятор_Бизнеса.H2Code_bot.png">
+    <meta property="og:image" content="https://h2code-bot.github.io/calculator-business-dandelion/og-image.jpg">
     <meta property="og:url" content="https://h2code-bot.github.io/calculator-business-dandelion/">
 
-    <!-- Schema.org (JSON-LD) для SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -34,11 +32,7 @@
     </script>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
             background: #f5f7fa;
@@ -85,31 +79,12 @@
             border-radius: 0 8px 8px 0;
             line-height: 1.5;
         }
-        .subhead a {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .subhead a:hover {
-            text-decoration: underline;
-        }
+        .subhead a { color: #1a73e8; text-decoration: none; font-weight: 600; }
+        .subhead a:hover { text-decoration: underline; }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 6px;
-            font-size: 15px;
-        }
-        .form-group .hint {
-            font-weight: 400;
-            font-size: 13px;
-            color: #7a8a9e;
-            margin-left: 8px;
-        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; color: #2c3e50; margin-bottom: 6px; font-size: 15px; }
+        .form-group .hint { font-weight: 400; font-size: 13px; color: #7a8a9e; margin-left: 8px; }
         .package-selector {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -129,39 +104,15 @@
             font-weight: 500;
             color: #1a2634;
         }
-        .package-option:hover {
-            background: #eef1f7;
-            border-color: #cbd5e1;
-        }
-        .package-option input[type="radio"] {
-            display: none;
-        }
-        .package-option.selected {
-            border-color: #f6c445;
-            background: #fff8e7;
-            box-shadow: 0 0 0 3px rgba(246, 196, 69, 0.2);
-        }
-        .package-option .pkg-name {
-            font-weight: 700;
-            font-size: 15px;
-        }
-        .package-option .pkg-detail {
-            font-size: 11px;
-            color: #5e6f8d;
-            margin-top: 4px;
-            line-height: 1.3;
-        }
+        .package-option:hover { background: #eef1f7; border-color: #cbd5e1; }
+        .package-option input[type="radio"] { display: none; }
+        .package-option.selected { border-color: #f6c445; background: #fff8e7; box-shadow: 0 0 0 3px rgba(246, 196, 69, 0.2); }
+        .package-option .pkg-name { font-weight: 700; font-size: 15px; }
+        .package-option .pkg-detail { font-size: 11px; color: #5e6f8d; margin-top: 4px; line-height: 1.3; }
 
-        .input-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .input-row .field {
-            flex: 1 1 200px;
-        }
-        .field input,
-        .field select {
+        .input-row { display: flex; flex-wrap: wrap; gap: 16px; }
+        .input-row .field { flex: 1 1 200px; }
+        .field input, .field select {
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #e2e8f0;
@@ -171,8 +122,7 @@
             transition: 0.2s;
             color: #1a2634;
         }
-        .field input:focus,
-        .field select:focus {
+        .field input:focus, .field select:focus {
             border-color: #f6c445;
             background: #fff;
             outline: none;
@@ -193,14 +143,8 @@
             margin-top: 8px;
             letter-spacing: 0.3px;
         }
-        .btn-calc:hover {
-            background: #eab832;
-            transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(246, 196, 69, 0.3);
-        }
-        .btn-calc:active {
-            transform: scale(0.98);
-        }
+        .btn-calc:hover { background: #eab832; transform: scale(1.01); box-shadow: 0 4px 12px rgba(246, 196, 69, 0.3); }
+        .btn-calc:active { transform: scale(0.98); }
 
         .result {
             margin-top: 28px;
@@ -216,16 +160,9 @@
             border-bottom: 1px solid #e6ecf3;
             font-size: 15px;
         }
-        .result .row:last-child {
-            border-bottom: none;
-        }
-        .result .row .label {
-            color: #4a5b72;
-        }
-        .result .row .value {
-            font-weight: 600;
-            color: #1a2634;
-        }
+        .result .row:last-child { border-bottom: none; }
+        .result .row .label { color: #4a5b72; }
+        .result .row .value { font-weight: 600; color: #1a2634; }
         .result .total {
             margin-top: 12px;
             padding-top: 14px;
@@ -236,13 +173,8 @@
             font-weight: 700;
             color: #1a2634;
         }
-        .result .total .value {
-            color: #1a73e8;
-            font-size: 24px;
-        }
-        .result .total .value.rub {
-            color: #0f9d58;
-        }
+        .result .total .value { color: #1a73e8; font-size: 24px; }
+        .result .total .value.rub { color: #0f9d58; }
         .result .note {
             margin-top: 14px;
             font-size: 13px;
@@ -252,9 +184,7 @@
             border-radius: 12px;
             line-height: 1.5;
         }
-        .result .note strong {
-            color: #1a2634;
-        }
+        .result .note strong { color: #1a2634; }
 
         .cta-block {
             margin-top: 30px;
@@ -264,16 +194,8 @@
             text-align: center;
             color: #1a2634;
         }
-        .cta-block h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .cta-block p {
-            font-size: 16px;
-            margin-bottom: 16px;
-            opacity: 0.9;
-        }
+        .cta-block h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .cta-block p { font-size: 16px; margin-bottom: 16px; opacity: 0.9; }
         .btn-bot {
             display: inline-block;
             padding: 14px 40px;
@@ -287,14 +209,7 @@
             border: none;
             cursor: pointer;
         }
-        .btn-bot:hover {
-            background: #2c3e50;
-            transform: scale(1.02);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-        }
-        .btn-bot i {
-            margin-right: 8px;
-        }
+        .btn-bot:hover { background: #2c3e50; transform: scale(1.02); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
 
         .seo-text {
             margin-top: 30px;
@@ -304,16 +219,9 @@
             color: #5e6f8d;
             line-height: 1.7;
         }
-        .seo-text strong {
-            color: #1a2634;
-        }
-        .seo-text a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
-        .seo-text a:hover {
-            text-decoration: underline;
-        }
+        .seo-text strong { color: #1a2634; }
+        .seo-text a { color: #1a73e8; text-decoration: none; }
+        .seo-text a:hover { text-decoration: underline; }
 
         .footer {
             margin-top: 20px;
@@ -323,10 +231,7 @@
             border-top: 1px solid #edf2f7;
             padding-top: 18px;
         }
-        .footer a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
+        .footer a { color: #1a73e8; text-decoration: none; }
 
         @media (max-width: 600px) {
             .wrapper { padding: 20px 16px; }
@@ -349,7 +254,6 @@
         <span style="font-size:13px; color:#5e6f8d;">1 PV ≈ 100 ₽ · Все бонусы официальные</span>
     </div>
 
-    <!-- Форма калькулятора -->
     <form id="calcForm">
         <div class="form-group">
             <label>Ваш стартовый пакет</label>
@@ -386,7 +290,7 @@
             <label>Количество личных приглашений (партнёров за 3 месяца)</label>
             <div class="input-row">
                 <div class="field">
-                    <input type="number" id="personalCount" value="10" min="0" step="1">
+                    <input type="number" id="personalCount" value="20" min="0" step="1">
                 </div>
             </div>
         </div>
@@ -427,7 +331,6 @@
         <button type="button" class="btn-calc" id="calcBtn">📊 Рассчитать доход за 3 месяца</button>
     </form>
 
-    <!-- Блок результатов -->
     <div class="result" id="resultBox">
         <div class="row">
             <span class="label">👤 Личный бонус (PV)</span>
@@ -458,14 +361,12 @@
         </div>
     </div>
 
-    <!-- Блок призыва к боту -->
     <div class="cta-block">
         <h3>🚀 Хотите подключить ИИ-Консультанта Dandelion?</h3>
         <p>Перейдите в @H2Code_bot и пройдите верификацию через вашего куратора.</p>
         <a href="https://t.me/H2Code_bot?start=RU-804" class="btn-bot" target="_blank">🤖 Перейти в бот →</a>
     </div>
 
-    <!-- SEO-текст с ключевыми словами и описанием механик -->
     <div class="seo-text">
         <h2 style="font-size:18px; color:#1a2634; margin-bottom:8px;">Как работает калькулятор дохода Dandelion</h2>
         <p>
@@ -509,7 +410,7 @@
                 label: 'Партнёрский',
                 personalPercent: 0.10,
                 binaryPercent: 0.06,
-                binaryLimit: 500,
+                binaryLimit: 500, 
                 matching: { levels: 1, rates: [0.05] }
             },
             business: {
@@ -547,7 +448,7 @@
         const personalBonusPV = document.getElementById('personalBonusPV');
         const binaryBonusPV = document.getElementById('binaryBonusPV');
         const matchingBonusPV = document.getElementById('matchingBonusPV');
-        const statusBonusPV = document.getElementById('statusBonusPV');
+        const statusBonusPVDisplay = document.getElementById('statusBonusPV');
         const totalPV = document.getElementById('totalPV');
         const totalRub = document.getElementById('totalRub');
         const noteBox = document.getElementById('noteBox');
@@ -573,53 +474,49 @@
             const personalCount = parseInt(personalCountInput.value) || 0;
             const dup = parseFloat(duplicationSelect.value) || 0.5;
             const avgCheck = parseFloat(avgCheckInput.value) || 120;
-            const rate = parseFloat(rateInput.value) || 100;
+            const conversionRate = parseFloat(rateInput.value) || 100;
 
             // --- 1. Личный бонус ---
             const personalPV = personalCount * avgCheck * pkg.personalPercent;
 
-            // --- 2. Бинарный бонус (активируется при >= 3 личных) ---
+            // --- 2. Структура и Бинарный бонус ---
             let binaryPV = 0;
             let structPV = 0;
-            let level1 = 0, level2 = 0;
-            let totalBinaryMembers = 0;
             let smallerLegPV = 0;
 
             if (personalCount >= 3) {
-                level1 = personalCount * dup;
-                level2 = level1 * dup;
-                totalBinaryMembers = personalCount + level1 + level2;
+                const level1 = personalCount * dup;
+                const level2 = level1 * dup;
+                const totalBinaryMembers = personalCount + level1 + level2;
                 structPV = totalBinaryMembers * avgCheck;
-                smallerLegPV = structPV * 0.5; // условно меньшая ветка = 50%
-                let rawBinary = smallerLegPV * pkg.binaryPercent;
-                // Ограничение лимитом пакета
-                binaryPV = Math.min(rawBinary, pkg.binaryLimit);
+                smallerLegPV = structPV * 0.5; 
+                
+                let rawBinary = smallerLegPV * (pkg.binaryPercent || 0);
+                const periodBinaryLimit = (pkg.binaryLimit || 0) * 3; 
+                binaryPV = Math.min(rawBinary, periodBinaryLimit);
             } else {
-                totalBinaryMembers = personalCount;
                 structPV = personalCount * avgCheck;
-                // smallerLegPV = 0, бинарный бонус = 0
+                smallerLegPV = structPV * 0.5;
             }
 
-            // --- 3. Матчинг-бонус (с учётом процентов пакета) ---
+            // --- 3. Матчинг-бонус ---
             let matchingPV = 0;
-            if (pkg.matching.levels > 0 && personalCount >= 3) {
-                // Бинарный бонус одного партнёра 1-го уровня (усреднённо)
-                const partnerBinary = binaryPV * dup;
-                const level1Partners = personalCount * dup;
-                let match = 0;
-                // Проходим по уровням
-                let currentLevelPartners = level1Partners;
+            if (pkg.matching && pkg.matching.levels > 0 && personalCount >= 3) {
+                let currentLevelPartners = personalCount * dup;
+                
                 for (let i = 0; i < pkg.matching.levels; i++) {
-                    const rate = pkg.matching.rates[i] || 0;
-                    match += partnerBinary * rate * currentLevelPartners;
-                    // Следующий уровень
+                    const levelRate = pkg.matching.rates[i] || 0;
+                    
+                    const partnerEstimatedStructurePV = (1 + dup + (dup * dup)) * avgCheck; 
+                    const partnerSmallerLegPV = partnerEstimatedStructurePV * 0.5;
+                    const partnerEstimatedBinary = Math.min(partnerSmallerLegPV * (pkg.binaryPercent || 0), (pkg.binaryLimit || 0) * 3);
+                    
+                    matchingPV += partnerEstimatedBinary * levelRate * currentLevelPartners;
                     currentLevelPartners = currentLevelPartners * dup;
                 }
-                matchingPV = match;
             }
 
-            // --- 4. Единоразовые бонусы за статусы ---
-            // Статусы по объёму меньшей ветки (используем приближение structPV * 0.5)
+            // --- 4. Единоразовые бонусы за статусы (С КОРРЕКТИРОВКОЙ ДЛЯ КЛИЕНТА) ---
             const statusLevels = [
                 { threshold: 1000, bonus: 30, name: 'Менеджер' },
                 { threshold: 3000, bonus: 100, name: 'Наставник' },
@@ -632,48 +529,54 @@
             ];
 
             let statusBonusPV = 0;
-            let achievedStatus = '';
-            // Используем меньшую ветку (если бинар не активирован, то structPV = personalCount * avgCheck, но статус всё равно считается)
-            // Для точности возьмём меньшую ветку как 50% от общего объёма структуры
-            const legForStatus = structPV * 0.5;
-            for (let i = statusLevels.length - 1; i >= 0; i--) {
-                if (legForStatus >= statusLevels[i].threshold) {
-                    statusBonusPV = statusLevels[i].bonus;
-                    achievedStatus = statusLevels[i].name;
-                    break;
+            let achievedStatuses = [];
+            
+            // Если пакет Клиентский, то объем для статусов всегда 0 (статусы не начисляются)
+            const legForStatus = (pkgKey === 'client') ? 0 : smallerLegPV; 
+
+            if (pkgKey !== 'client') {
+                for (let i = 0; i < statusLevels.length; i++) {
+                    if (legForStatus >= statusLevels[i].threshold) {
+                        statusBonusPV += statusLevels[i].bonus;
+                        achievedStatuses.push(statusLevels[i].name);
+                    }
                 }
             }
 
             // --- Итоговый доход ---
             const totalPVValue = personalPV + binaryPV + matchingPV + statusBonusPV;
-            const totalRubValue = totalPVValue * rate;
+            const totalRubValue = totalPVValue * conversionRate;
 
-            // --- Отображение ---
+            // --- Отображение результатов в DOM ---
             personalBonusPV.textContent = personalPV.toFixed(2);
             binaryBonusPV.textContent = binaryPV.toFixed(2);
             matchingBonusPV.textContent = matchingPV.toFixed(2);
-            statusBonusPV.textContent = statusBonusPV.toFixed(2);
+            statusBonusPVDisplay.textContent = statusBonusPV.toFixed(2);
             totalPV.textContent = totalPVValue.toFixed(2);
-            totalRub.textContent = totalRubValue.toFixed(2) + ' ₽';
+            totalRub.textContent = totalRubValue.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ₽';
 
-            // --- Примечание с пояснениями ---
+            // --- Формирование текста примечания ---
             let note = `⚡ <strong>Расчёт включает:</strong> личный бонус, бинарный бонус (активируется от 3 личных), матчинг (чек от чека) до ${pkg.matching.levels} уровня, и единоразовые бонусы за статусы.`;
             if (pkgKey === 'client') {
-                note += ' <span style="color:#c0392b;">Клиентский пакет не даёт доступа к бинарному и матчинг-бонусам.</span>';
-            }
-            if (personalCount < 3) {
+                note += ' <span style="color:#c0392b;">Клиентский пакет не участвует в бинарной системе, матчинге и не получает бонусы за статусы.</span>';
+            } else if (personalCount < 3) {
                 note += ' <span style="color:#c0392b;">Бинарный и матчинг-бонусы начисляются только при активации бинара — минимум 3 личных приглашения на пакет «Партнёрский».</span>';
             }
-            if (achievedStatus) {
-                note += ` 🏆 Достигнут статус «${achievedStatus}» (бонус ${statusBonusPV} PV).`;
+            
+            if (pkgKey !== 'client') {
+                if (achievedStatuses.length > 0) {
+                    note += ` 🏆 Достигнуты статусы: <strong>${achievedStatuses.join(', ')}</strong> (суммарный бонус ${statusBonusPV} PV).`;
+                } else {
+                    note += ` 📊 Объём меньшей ветки: ${legForStatus.toFixed(2)} PV (для первого статуса «Менеджер» нужно ≥ 1000 PV).`;
+                }
+                note += ' <strong>Статусные бонусы — единоразовые</strong>, выплачиваются при первом достижении каждого статуса.';
             }
-            note += ' <strong>Статусные бонусы — единоразовые</strong>, выплачиваются при первом достижении статуса.';
             noteBox.innerHTML = note;
         }
 
+        // Навешивание обработчиков событий
         calcBtn.addEventListener('click', calculate);
 
-        // Авторасчёт при изменении полей
         const inputs = [personalCountInput, duplicationSelect, avgCheckInput, rateInput];
         inputs.forEach(inp => {
             inp.addEventListener('input', function() {
@@ -683,6 +586,7 @@
         });
         packageRadios.forEach(radio => radio.addEventListener('change', calculate));
 
+        // Первичный расчет при загрузке страницы
         window.addEventListener('load', calculate);
     })();
 </script>
